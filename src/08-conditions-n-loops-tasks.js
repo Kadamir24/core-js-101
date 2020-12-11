@@ -257,8 +257,31 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let max = 0;
+  let min = 0;
+  if (a > b) {
+    max = a;
+    min = b;
+  } else {
+    max = b;
+    min = a;
+  }
+
+  let res = '';
+  if (isStartIncluded) {
+    res += '[';
+  } else {
+    res += '(';
+  }
+  res += `${min}, `;
+  res += max;
+  if (isEndIncluded) {
+    res += ']';
+  } else {
+    res += ')';
+  }
+  return res;
 }
 
 
@@ -274,8 +297,13 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  let newStr = '';
+
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    newStr += str[i];
+  }
+  return newStr;
 }
 
 
@@ -291,8 +319,14 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const str = String(num);
+  let newStr = '';
+
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    newStr += str[i];
+  }
+  return Number(newStr);
 }
 
 
@@ -316,8 +350,25 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let sum = 0;
+  const ccnString = String(ccn);
+  for (let i = 0; i < ccnString.length; i += 1) {
+    let ccnNumber = Number(ccnString[i]);
+    if ((ccnString.length - i) % 2 === 0) {
+      ccnNumber *= 2;
+      if (ccnNumber > 9) {
+        const ccnString2 = String(ccnNumber);
+        ccnNumber = Number(ccnString2[0]) + Number(ccnString2[1]);
+      }
+    }
+    sum += ccnNumber;
+  }
+
+  if (sum % 10 === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
