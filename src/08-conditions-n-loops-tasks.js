@@ -385,8 +385,17 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const numStr = String(num);
+  let res = 0;
+  if (numStr.length === 1) {
+    return Number(numStr);
+  }
+  for (let i = 0; i < numStr.length; i += 1) {
+    const temp = Number(numStr[i]);
+    res += temp;
+  }
+  return getDigitalRoot(res);
 }
 
 
@@ -411,8 +420,34 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  let res = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '(' || str[i] === '[' || str[i] === '{' || str[i] === '<') {
+      res += str[i];
+    } else if (str[i] === ')') {
+      if (res[res.length - 1] === '(') {
+        res = res.slice(0, res.length - 1);
+      }
+    } else if (str[i] === ']') {
+      if (res[res.length - 1] === '[') {
+        res = res.slice(0, res.length - 1);
+      }
+    } else if (str[i] === '}') {
+      if (res[res.length - 1] === '{') {
+        res = res.slice(0, res.length - 1);
+      }
+    } else if (str[i] === '>') {
+      if (res[res.length - 1] === '<') {
+        res = res.slice(0, res.length - 1);
+      }
+    }
+  }
+
+  if (res.length === 0 && str.length % 2 === 0) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -436,8 +471,15 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  const base = '0123456789';
+  let result = '';
+  let input = num;
+  while (input > 0) {
+    result = base[input % n] + result;
+    input = Math.floor(input / n);
+  }
+  return result;
 }
 
 
@@ -478,6 +520,35 @@ function getCommonDirectoryPath(/* pathes */) {
  */
 function getMatrixProduct(/* m1, m2 */) {
   throw new Error('Not implemented');
+  // const res = [];
+  // // let flagStop = false;
+  // if (m1.length === 1 && m2.length === 1) {
+  //   // flagStop = true;
+  //   let sum = 0;
+  //   const mat1 = ([].concat(...m1));
+  //   const mat2 = ([].concat(...m2));
+  //   for (let i = 0; i < mat1.length; i += 1) {
+  //     sum += mat1[i] * mat2[i];
+  //   }
+  //   res.push(sum);
+  //   return res;
+  // }
+  // for (let i = 0; i < m1.length; i += 1) {
+  //   const row = [];
+  //   for (let j = 0; j < m2.length; j += 1) {
+  //     let newCell = 0;
+  //     for (let k = 0; k < m1[i].length; k += 1) {
+  //       // if (flagStop) {
+  //       newCell += m1[i][k] * m2[j][k];
+  //       // } else {
+  //       //   newCell += m1[i][k] * m2[k][j];
+  //       // }
+  //     }
+  //     row.push(newCell);
+  //   }
+  //   res.push(row);
+  // }
+  // return res;
 }
 
 
