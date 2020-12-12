@@ -520,17 +520,20 @@ function getCommonDirectoryPath(/* pathes */) {
  */
 function getMatrixProduct(/* m1, m2 */) {
   throw new Error('Not implemented');
+  // // throw new Error('Not implemented');
   // const res = [];
   // // let flagStop = false;
   // if (m1.length === 1 && m2.length === 1) {
   //   // flagStop = true;
+  //   const tempArr = [];
   //   let sum = 0;
   //   const mat1 = ([].concat(...m1));
   //   const mat2 = ([].concat(...m2));
   //   for (let i = 0; i < mat1.length; i += 1) {
   //     sum += mat1[i] * mat2[i];
   //   }
-  //   res.push(sum);
+  //   tempArr.push(sum);
+  //   res.push(tempArr);
   //   return res;
   // }
   // for (let i = 0; i < m1.length; i += 1) {
@@ -539,15 +542,22 @@ function getMatrixProduct(/* m1, m2 */) {
   //     let newCell = 0;
   //     for (let k = 0; k < m1[i].length; k += 1) {
   //       // if (flagStop) {
-  //       newCell += m1[i][k] * m2[j][k];
+  //       // newCell += m1[i][k] * m2[j][k];
   //       // } else {
-  //       //   newCell += m1[i][k] * m2[k][j];
+  //       newCell += m1[i][k] * m2[k][j];
   //       // }
   //     }
   //     row.push(newCell);
   //   }
   //   res.push(row);
   // }
+
+  // for (let index = 0; index < res.length; index += 1) {
+  //   if (Number.isNaN(res[index])) {
+  //     res.pop(res[index]);
+  //   }
+  // }
+
   // return res;
 }
 
@@ -582,8 +592,74 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const row1 = position[0];
+  const row2 = position[1];
+  const row3 = position[2];
+
+  const row1Win = [];
+  const row2Win = [];
+  const row3Win = [];
+
+  const col1Win = [];
+  const col2Win = [];
+  const col3Win = [];
+
+  const diag1 = [];
+  const diag2 = [];
+  for (let i = 0; i < 3; i += 1) {
+    row1Win.push(row1[i]);
+    if (i === 0) {
+      col1Win.push(row1[i]);
+      diag1.push(row1[i]);
+    } else if (i === 1) {
+      col2Win.push(row1[i]);
+    } else if (i === 2) {
+      col3Win.push(row1[i]);
+      diag2.push(row1[i]);
+    }
+    for (let j = 0; j < 3; j += 1) {
+      row2Win.push(row2[j]);
+      if (j === 0) {
+        col1Win.push(row2[j]);
+      } else if (j === 1) {
+        col2Win.push(row2[j]);
+        diag1.push(row2[j]);
+        diag2.push(row2[j]);
+      } else if (j === 2) {
+        col3Win.push(row2[j]);
+      }
+
+      for (let k = 0; k < 3; k += 1) {
+        row3Win.push(row3[k]);
+        if (k === 0) {
+          col1Win.push(row3[k]);
+          diag2.push(row3[k]);
+        } else if (k === 1) {
+          col2Win.push(row3[k]);
+        } else if (k === 2) {
+          col3Win.push(row3[k]);
+          diag1.push(row3[k]);
+        }
+      }
+    }
+  }
+
+  const isX = (val) => val === 'X';
+  const is0 = (val) => val === '0';
+  if (row1Win.every(is0) || row2Win.every(is0) || row3Win.every(is0)
+  || col1Win.every(is0) || col2Win.every(is0) || col3Win.every(is0)
+  || diag1.every(is0) || diag2.every(is0)) {
+    return '0';
+  }
+
+  if (row1Win.every(isX) || row2Win.every(isX) || row3Win.every(isX)
+  || col1Win.every(isX) || col2Win.every(isX) || col3Win.every(isX)
+  || diag1.every(isX) || diag2.every(isX)) {
+    return 'X';
+  }
+
+  return undefined;
 }
 
 
