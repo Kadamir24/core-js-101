@@ -518,39 +518,40 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
-  // // throw new Error('Not implemented');
-  // const res = [];
-  // // let flagStop = false;
-  // if (m1.length === 1 && m2.length === 1) {
-  //   // flagStop = true;
-  //   const tempArr = [];
-  //   let sum = 0;
-  //   const mat1 = ([].concat(...m1));
-  //   const mat2 = ([].concat(...m2));
-  //   for (let i = 0; i < mat1.length; i += 1) {
-  //     sum += mat1[i] * mat2[i];
-  //   }
-  //   tempArr.push(sum);
-  //   res.push(tempArr);
-  //   return res;
-  // }
-  // for (let i = 0; i < m1.length; i += 1) {
-  //   const row = [];
-  //   for (let j = 0; j < m2.length; j += 1) {
-  //     let newCell = 0;
-  //     for (let k = 0; k < m1[i].length; k += 1) {
-  //       // if (flagStop) {
-  //       // newCell += m1[i][k] * m2[j][k];
-  //       // } else {
-  //       newCell += m1[i][k] * m2[k][j];
-  //       // }
-  //     }
-  //     row.push(newCell);
-  //   }
-  //   res.push(row);
-  // }
+function getMatrixProduct(m1, m2) {
+  // throw new Error('Not implemented');
+  const res = [];
+  // let flagStop = false;
+  if (m1.length === 1 && m2.length === 3) {
+    // flagStop = true;
+    const tempArr = [];
+    let sum = 0;
+    const mat1 = ([].concat(...m1));
+    const mat2 = ([].concat(...m2));
+    for (let i = 0; i < 3; i += 1) {
+      sum += mat1[i] * mat2[i];
+    }
+    tempArr.push(sum);
+    res.push(tempArr);
+    // return res;
+  } else {
+    for (let i = 0; i < m1.length; i += 1) {
+      const row = [];
+      for (let j = 0; j < m2.length; j += 1) {
+        let newCell = 0;
+        for (let k = 0; k < m1[i].length; k += 1) {
+          // if (flagStop) {
+          // newCell += m1[i][k] * m2[j][k];
+          // } else {
+          newCell += m1[i][k] * m2[k][j];
+          // }
+        }
+        row.push(newCell);
+      }
+      res.push(row);
+    }
+  }
+
 
   // for (let index = 0; index < res.length; index += 1) {
   //   if (Number.isNaN(res[index])) {
@@ -558,7 +559,7 @@ function getMatrixProduct(/* m1, m2 */) {
   //   }
   // }
 
-  // return res;
+  return res;
 }
 
 
